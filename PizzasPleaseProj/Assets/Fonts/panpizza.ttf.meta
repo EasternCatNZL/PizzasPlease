@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c7c3e57724744424991d1c402579dfd9
+timeCreated: 1487794994
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 90
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pan Pizza
+  fontNames:
+  - Pan Pizza
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
