@@ -5,6 +5,7 @@ using UnityEngine;
 public class Slice : MonoBehaviour {
 
     public int InZone = 0;
+    public bool ToppingsFound;
     public GameObject Plane;
     public Material[] Materials;
 
@@ -37,19 +38,14 @@ public class Slice : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        print("New Item Entered Zone");
-        InZone++;
         if (!Setup)
         {
             CorrectToppings.Add(other.gameObject);
-            print(CorrectToppings.Count);
             ToppingsOnSlice.Add(other.gameObject);
-            print(ToppingsOnSlice.Count);
         }
         else
         {
             ToppingsOnSlice.Add(other.gameObject);
-            print(ToppingsOnSlice.Count);
         }
     }
 
@@ -59,17 +55,36 @@ public class Slice : MonoBehaviour {
             return false;
         else
         {
-            return true;
+            ToppingsFound = false;
+            for (int i = 0; i < CorrectToppings.Count; i++)
+            {
+                FindGameObject = CorrectToppings[i];
+                if (!ToppingsOnSlice.Find(isGameObject))
+                {
+                    return false;
+                }
+                else
+                {
+                    ToppingsFound = true;
+                }
+            }
+            
+            return ToppingsFound;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         FindGameObject = other.gameObject;
-        ToppingsOnSlice.Remove(ToppingsOnSlice.Find(isGameObject));
-
-        print("New Item Exited Zone");
-        InZone--;
+        if (!Setup)
+        {
+            CorrectToppings.Remove(CorrectToppings.Find(isGameObject));
+            ToppingsOnSlice.Remove(ToppingsOnSlice.Find(isGameObject));
+        }
+        else
+        {
+            ToppingsOnSlice.Remove(ToppingsOnSlice.Find(isGameObject));
+        }
     }
 
     private bool isGameObject(GameObject gameObject)
