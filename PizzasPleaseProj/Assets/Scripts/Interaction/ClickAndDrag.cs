@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class ClickAndDrag : MonoBehaviour {
 
-    private Vector3 startPos; //where click landed
-    private Transform clickedObject = null; //reference to the clicked object
+    public GameObject clickDragFrame; //plane taken for objects to abide by
+    //public Plane 
+
+    //private Vector3 startPos; //where click landed
+    //private Transform clickedObject = null; //reference to the clicked object
     private Vector3 offset; //offset held to prevent object from snapping
     private Plane plane; //plane aligned with camera to assist in dragging objects
 
@@ -22,10 +25,11 @@ public class ClickAndDrag : MonoBehaviour {
     private void OnMouseDown()
     {
         //align plane to camera
-        plane.SetNormalAndPosition(Camera.main.transform.forward, transform.position); 
+        plane.SetNormalAndPosition(clickDragFrame.transform.up, transform.position); 
         //cast ray form camera based on mouse position on screen
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float distance;
+        
         plane.Raycast(ray, out distance);
         //get offset to prevent object from snapping
         offset = transform.position - ray.GetPoint(distance);
