@@ -16,22 +16,25 @@ public class Slice : MonoBehaviour {
     private GameObject FindGameObject;
 	// Use this for initialization
 	void Start () {
-
+      
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(CheckTopping())
+        if (Plane != null)
         {
-            Plane.GetComponent<MeshRenderer>().material = Materials[2];
-        }
-        else if(!CheckTopping())
-        {
-            Plane.GetComponent<MeshRenderer>().material = Materials[0];
+            if (CheckTopping())
+            {
+                Plane.GetComponent<MeshRenderer>().material = Materials[2];
+            }
+            else if (!CheckTopping())
+            {
+                Plane.GetComponent<MeshRenderer>().material = Materials[0];
+            }
         }
 	}
 
-    public void SetupComplete()
+    public void BakeSlice()//Confirms the toppings on the pizza
     {
         Setup = true;
     }
@@ -49,8 +52,10 @@ public class Slice : MonoBehaviour {
         }
     }
 
-    private bool CheckTopping()
+    public bool CheckTopping()
     {
+        if (CorrectToppings.Count == 0 && ToppingsOnSlice.Count == 0)
+            return true;
         if (CorrectToppings.Count != ToppingsOnSlice.Count)
             return false;
         else

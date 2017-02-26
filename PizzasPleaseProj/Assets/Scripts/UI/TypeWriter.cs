@@ -12,14 +12,20 @@ public class TypeWriter : MonoBehaviour
     public float timeDelay = 0.05f;
 
     private Text textBox;
-    private string textToPrint = "Good Evening Humans. Do you want to play a game of chess?";
+    private string textToPrint = "";
     private float lastTime;
     private int index;
+    private bool Done = false;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         textBox = gameObject.GetComponent<Text>();
-        gameObject.GetComponent<Text>().text = "";
+        textToPrint = textBox.text;
+        textBox.text = "";
+    }
+
+    void Start()
+    {         
         lastTime = Time.time;
         index = 0;
         if(fileName != "")
@@ -31,7 +37,26 @@ public class TypeWriter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TypeText();
+        if(!Done)
+        {
+            TypeText();
+        }
+    }
+
+    public void SetNewText(string _newText)
+    {
+        textBox.text = "";
+        textToPrint = _newText;
+        index = 0;
+        Done = false;
+    }
+
+    public void LoadNewText(string _fileName)
+    {
+        textBox.text = "";
+        LoadText(_fileName);
+        index = 0;
+        Done = false;
     }
 
     void TypeText()
@@ -44,6 +69,11 @@ public class TypeWriter : MonoBehaviour
             textBox.text = tempString;
             lastTime = Time.time;
             index++;
+        }
+        else if (index == textToPrint.Length && Done == false)
+        {
+            GameObject.Find("IntroCutscene").GetComponent<IntroCutscene>().NextScene();
+            Done = true;
         }
     }
 

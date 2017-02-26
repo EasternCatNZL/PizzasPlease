@@ -75,10 +75,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Interaction\ClickAndDrag.cs" />
+    <Compile Include="Assets\Scripts\IntroCutscene.cs" />
     <Compile Include="Assets\Scripts\Slice Checking\SimpleMove.cs" />
     <Compile Include="Assets\Scripts\Slice Checking\Slice.cs" />
     <Compile Include="Assets\Scripts\TestScripts.cs" />
+    <Compile Include="Assets\Scripts\Timer\gameTimer.cs" />
+    <Compile Include="Assets\Scripts\UI\Tray.cs" />
+    <Compile Include="Assets\Scripts\UI\TypeWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Animations\PlaceHolder.txt" />
+    <None Include="Assets\AudioClips\PlaceHolder.txt" />
+    <None Include="Assets\Materials\PlaceHolder.txt" />
+    <None Include="Assets\Models\PlaceHolder.txt" />
+    <None Include="Assets\Shaders\PlaceHolder.txt" />
+    <None Include="Assets\Sprites\PlaceHolder.txt" />
+    <None Include="Assets\Textures\PlaceHolder.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
