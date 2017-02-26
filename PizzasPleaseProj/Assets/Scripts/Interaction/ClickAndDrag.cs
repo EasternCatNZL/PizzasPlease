@@ -11,10 +11,10 @@ public class ClickAndDrag : MonoBehaviour {
     //private Transform clickedObject = null; //reference to the clicked object
     private Vector3 offset; //offset held to prevent object from snapping
     private Plane plane; //plane aligned with camera to assist in dragging objects
-
+    
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
