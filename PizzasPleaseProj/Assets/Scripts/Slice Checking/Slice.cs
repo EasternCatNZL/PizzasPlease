@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Slice : MonoBehaviour {
 
-    public int InZone = 0;
-    public bool ToppingsFound;
-    public GameObject Plane;
-    public Material[] Materials;
+    public int InZone = 0; //number of toppings within the slice
+    public bool ToppingsFound; //check for whether if toppings have been found
+    public GameObject Plane; //debugging
+    public Material[] Materials; //debugging
 
-    public List<GameObject> CorrectToppings;
-    public List<GameObject> ToppingsOnSlice;
+    //[HideInInspector]
+    public List<GameObject> CorrectToppings; //list of correct toppings on this slice
+    //[HideInInspector]
+    public List<GameObject> ToppingsOnSlice; //list of toppings on the slice currently
 
-    private bool Setup = false;
-    private GameObject FindGameObject;
+    public bool Setup = false; //checks if the setup is complete
+    private GameObject FindGameObject; //reference find game objects
+
 	// Use this for initialization
 	void Start () {
       
@@ -36,13 +39,16 @@ public class Slice : MonoBehaviour {
 
     public void BakeSlice()//Confirms the toppings on the pizza
     {
+        print("Slice Baked");
         Setup = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //before setup complete
         if (!Setup)
         {
+            //add toppings to the list on slice
             CorrectToppings.Add(other.gameObject);
             ToppingsOnSlice.Add(other.gameObject);
         }
@@ -52,6 +58,7 @@ public class Slice : MonoBehaviour {
         }
     }
 
+    //
     public bool CheckTopping()
     {
         if (CorrectToppings.Count == 0 && ToppingsOnSlice.Count == 0)

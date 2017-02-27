@@ -83,7 +83,7 @@ public class IntroCutscene : MonoBehaviour
         else if (SceneIndex == Scenes.Length + 1 && Background.color.a <= 0.0f)
         {
             GameObject.Find("GameController").GetComponent<GameController>().StartRound();
-            this.enabled = false;
+            Destroy(gameObject);
         }
     }
 
