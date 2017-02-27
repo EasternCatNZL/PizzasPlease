@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public Image Scoreboard;
+    public Text ScoreWrong;
+    public Text ScoreRight;
     public float RoundLength = 60.0f; //timer for round
     public int DrugCount = 0; //Number of drugs on pizza
     public Text OutputScreen; //reference to text in ui for messages
     public GameObject[] Pizzas; //array of possible pizzas
+    public GameObject GoodCutscene;
+    public GameObject BadCutscene;
 
-    private int PizzaIndex = 0; //index of current pizze
-    private GameObject CurrentPizza; //reference to current pizze
+    public int PizzaIndex = 0; //index of current pizze
+    public GameObject CurrentPizza; //reference to current pizze
     private GameObject Timer; //reference to timer
     public List<GameObject> Slices; //list of slices on pizza
     //Scoring
@@ -22,6 +27,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Scoreboard.gameObject.SetActive(false);
         Timer = GameObject.Find("Timer");
         if (Timer == null)
         {
@@ -32,7 +38,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Timer.GetComponent<gameTimer>().myTimer == 0.0f)
+        {
 
+        }
     }
 
     //setup func for one round, till timer finishes
@@ -121,30 +130,40 @@ public class GameController : MonoBehaviour
     //get the next pizza
     void NextPizza()
     {
+        print("Getting Next Pizza");
         if (CurrentPizza != null)
         {
             Destroy(CurrentPizza);
         }
-        Slices.Clear();
-        
         Instantiate(Pizzas[PizzaIndex], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        CurrentPizza = GameObject.FindWithTag("Pizza");
-        for(int i = 1; i < 13; ++i)
-        {
-            string index = i.ToString();
-            Slices.Add(GameObject.Find("PizzaSlice" + index));
-        }
-        //foreach(GameObject Slice in Slices)
+        Slices.Clear();
+        //CurrentPizza = GameObject.FindWithTag("Pizza");
+        //for (int i = 1; i < 13; ++i)
         //{
-        //    Slice.GetComponent<Slice>().BakeSlice();
+        //    string index = i.ToString();
+        //    Slices.Add(GameObject.Find("PizzaSlice" + index));
         //}
+        StartCoroutine(FindPizza());
         StartCoroutine(BakeSlices());
         PizzaIndex++;
     }
 
+    IEnumerator FindPizza()
+    {
+        
+        yield return new WaitForSeconds(0.1f);
+        CurrentPizza = GameObject.FindWithTag("Pizza");
+        for (int i = 1; i < 13; ++i)
+        {
+            string index = i.ToString();
+            Slices.Add(GameObject.Find("PizzaSlice" + index));
+        }
+    }
+
     IEnumerator BakeSlices()
     {
-        yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(0.1f);
         foreach (GameObject Slice in Slices)
         {
             Slice.GetComponent<Slice>().BakeSlice();

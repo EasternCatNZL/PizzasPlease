@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\TestScripts.cs" />
     <Compile Include="Assets\Scripts\Timer\gameTimer.cs" />
     <Compile Include="Assets\Scripts\UI\Tray.cs" />
+    <Compile Include="Assets\Scripts\UI\TrayRotate.cs" />
     <Compile Include="Assets\Scripts\UI\TypeWriter.cs" />
   </ItemGroup>
   <ItemGroup>
