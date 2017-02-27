@@ -21,7 +21,8 @@ public class IntroCutscene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        TextBox.GetComponent<TypeWriter>().SetNewText(SceneText[SceneIndex]);
+        if(TextBox != null)
+            TextBox.GetComponent<TypeWriter>().SetNewText(SceneText[SceneIndex]);
     }
 
     // Update is called once per frame
@@ -37,7 +38,8 @@ public class IntroCutscene : MonoBehaviour
                 newColor = tempImage.color;
                 newColor.a -= Increment;
                 tempImage.color = newColor;
-                TextBox.color = newColor;
+                if(TextBox != null)
+                    TextBox.color = newColor;
 
                 lastTime = Time.time;
             }
@@ -46,22 +48,26 @@ public class IntroCutscene : MonoBehaviour
             {
                 SceneIndex++;
                 Increment *= -1;
-                TextBox.text = "";
+                if(TextBox != null)
+                    TextBox.text = "";
                 FadeIn = true;
             }
             else if (tempImage.color.a >= 1)
             {
                 ChangeScene = false;
                 Increment *= -1;
-                TextBox.GetComponent<TypeWriter>().SetNewText(SceneText[SceneIndex]);
+                if(TextBox != null)
+                    TextBox.GetComponent<TypeWriter>().SetNewText(SceneText[SceneIndex]);
                 FadeIn = false;
             }
             if (SceneIndex == Scenes.Length)
             {
                 Increment *= -1;
                 SceneIndex++;
-                TextBacking.enabled = false;
-                TextBox.enabled = false;
+                if(TextBacking != null)
+                    TextBacking.enabled = false;
+                if (TextBox != null)
+                    TextBox.enabled = false;
             }
         }
         if (SceneIndex == Scenes.Length + 1 && Background.color.a > 0.0f)
@@ -74,8 +80,10 @@ public class IntroCutscene : MonoBehaviour
                 newColor = Background.color;
                 newColor.a -= Increment;
                 Background.color = newColor;
-                TextBacking.color = newColor;
-                TextBox.color = newColor;
+                if(TextBacking != null)
+                    TextBacking.color = newColor;
+                if(TextBox != null)
+                    TextBox.color = newColor;
 
                 lastTime = Time.time;
             }
